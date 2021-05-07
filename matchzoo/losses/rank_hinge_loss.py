@@ -1,4 +1,5 @@
 """The rank hinge loss."""
+"""铰链损失函数。"""
 import torch
 from torch import nn
 import torch.nn.functional as F
@@ -29,14 +30,19 @@ class RankHingeLoss(nn.Module):
         :class:`RankHingeLoss` constructor.
 
         :param num_neg: Number of negative instances in hinge loss.
+        :param num_neg: 铰链损失的负面实例数。
+
         :param margin: Margin between positive and negative scores.
             Float. Has a default value of :math:`0`.
+        :param margin: 正负分数之间的差距。
+
         :param reduction: String. Specifies the reduction to apply to
             the output: ``'none'`` | ``'mean'`` | ``'sum'``.
             ``'none'``: no reduction will be applied,
             ``'mean'``: the sum of the output will be divided by the
                 number of elements in the output,
             ``'sum'``: the output will be summed.
+        :param reduction: 指定要应用于输出的缩减。
         """
         super().__init__()
         self.num_neg = num_neg
@@ -84,3 +90,12 @@ class RankHingeLoss(nn.Module):
     def margin(self, value):
         """`margin` setter."""
         self._margin = value
+
+
+if __name__ == '__main__':
+    # 调试未成功
+    a = [[0.1, 0.3, 0.2, 0.4]]
+    b = [[0.4, 0.2, 0.3, 0.1]]
+    rankHingeLoss = RankHingeLoss()
+    result = rankHingeLoss.forward(torch.tensor(a), torch.tensor(b))
+    print(result)
