@@ -48,3 +48,11 @@ class MeanAveragePrecision(RankingMetric):
             return 0.
         else:
             return result / pos
+
+
+if __name__ == '__main__':
+    meanAveragePrecision = MeanAveragePrecision()
+    # print(meanAveragePrecision)
+    y_true = [0, 1, 0, 0]
+    y_pred = [0.1, 0.6, 0.2, 0.3]
+    print("{:<10} {:>5}".format('MAP', meanAveragePrecision(y_true, y_pred)))
